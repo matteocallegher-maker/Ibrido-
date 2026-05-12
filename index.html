@@ -2,13 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#0f0f13">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Ibrido">
-<link rel="manifest" href="manifest.json">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Programma Ibrido</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -23,15 +17,9 @@
   .plan { display: none; }
   .plan.active { display: block; }
 
-  .week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-bottom: 28px; }
-  .day-cell { background: #1a1a24; border-radius: 10px; padding: 10px 6px; text-align: center; font-size: 0.72rem; }
-  .day-cell .day-name { font-weight: 700; color: #888; margin-bottom: 4px; font-size: 0.65rem; text-transform: uppercase; }
-  .day-cell .day-icon { font-size: 1.4rem; margin-bottom: 4px; }
-  .day-cell .day-label { color: #ccc; line-height: 1.3; }
-  .day-cell.strength { border: 2px solid #e8501a; }
-  .day-cell.run { border: 2px solid #3a9fd5; }
-  .day-cell.long { border: 2px solid #f5c842; }
-  .day-cell.rest { border: 2px solid #333; opacity: 0.6; }
+  .flex-guide { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
+  .flex-rule { background: #1a1a24; border-left: 3px solid #e8501a; border-radius: 8px; padding: 10px 14px; font-size: 0.8rem; color: #ccc; line-height: 1.5; }
+  .flex-rule strong { color: #fff; }
 
   .sessions { display: flex; flex-direction: column; gap: 16px; }
   .session-card { background: #1a1a24; border-radius: 14px; overflow: hidden; }
@@ -66,10 +54,6 @@
   .tip { display: flex; gap: 8px; margin-bottom: 8px; font-size: 0.78rem; color: #bbb; line-height: 1.4; }
   .tip:last-child { margin-bottom: 0; }
   .tip-icon { flex-shrink: 0; }
-
-  .legend { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; font-size: 0.72rem; color: #888; }
-  .legend-item { display: flex; align-items: center; gap: 5px; }
-  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
 
   /* ── KG INPUT ── */
   .kg-cell { min-width: 90px; }
@@ -151,21 +135,10 @@
 <!-- PIANO 2 GIORNI -->
 <div class="plan active" id="p2">
 
-  <div class="legend">
-    <div class="legend-item"><div class="legend-dot" style="background:#e8501a"></div> Forza</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#3a9fd5"></div> Corsa</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#f5c842"></div> Lungo</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#333"></div> Riposo</div>
-  </div>
-
-  <div class="week-grid">
-    <div class="day-cell rest"><div class="day-name">Lun</div><div class="day-icon">😴</div><div class="day-label">Recupero gambe</div></div>
-    <div class="day-cell run"><div class="day-name">Mar</div><div class="day-icon">🏃</div><div class="day-label">Corsa oppure</div></div>
-    <div class="day-cell run"><div class="day-name">Mer</div><div class="day-icon">🏃</div><div class="day-label">Corsa</div></div>
-    <div class="day-cell strength"><div class="day-name">Gio</div><div class="day-icon">💪</div><div class="day-label">UPPER pesante</div></div>
-    <div class="day-cell run"><div class="day-name">Ven</div><div class="day-icon">🏃</div><div class="day-label">Corsa</div></div>
-    <div class="day-cell strength"><div class="day-name">Sab</div><div class="day-icon">💪</div><div class="day-label">LOWER moderato</div></div>
-    <div class="day-cell long"><div class="day-name">Dom</div><div class="day-icon">🏃💨</div><div class="day-label">Lungo</div></div>
+  <div class="flex-guide">
+    <div class="flex-rule">💪 <strong>UPPER</strong> — Fallo quando ti senti fresco. Almeno 1 giorno di distanza da una corsa impegnativa.</div>
+    <div class="flex-rule">🦵 <strong>LOWER</strong> — Fallo quando le gambe sono recuperate. Evita le 24h prima del lungo o di un interval training.</div>
+    <div class="flex-rule">⚡ <strong>Regola d'oro</strong> — Se hai dubbi, chiediti: ho dormito? Le gambe sono ok? Se no, riposa senza sensi di colpa.</div>
   </div>
 
   <div class="sessions">
@@ -173,13 +146,13 @@
     <!-- UPPER -->
     <div class="session-card open" id="s2a">
       <div class="session-header" onclick="toggleSession('s2a')">
-        <span class="session-badge">Giovedì</span>
-        <span class="session-title">UPPER — Spinta · Tiraggio · Braccia</span>
+        <span class="session-badge">UPPER</span>
+        <span class="session-title">Spinta · Tiraggio · Braccia</span>
         <span class="session-meta">⏱ ~48 min</span>
         <span class="chevron">▼</span>
       </div>
       <div class="session-body">
-        <div class="session-note">💬 Giorno lontano da tutte le corse critiche — vai pesante senza pensieri.</div>
+        <div class="session-note">💬 Scegli un giorno in cui non hai corso fort il giorno prima. Vai pesante senza pensieri.</div>
         <table>
           <thead><tr><th>Esercizio</th><th>Serie × Rep</th><th>Kg usati</th><th>Note</th></tr></thead>
           <tbody>
@@ -202,13 +175,13 @@
     <!-- LOWER -->
     <div class="session-card" id="s2b">
       <div class="session-header" onclick="toggleSession('s2b')">
-        <span class="session-badge lower">Sabato</span>
-        <span class="session-title">LOWER — Gambe moderato pre-lungo</span>
+        <span class="session-badge lower">LOWER</span>
+        <span class="session-title">Gambe — Volume moderato</span>
         <span class="session-meta">⏱ ~45 min</span>
         <span class="chevron">▼</span>
       </div>
       <div class="session-body">
-        <div class="session-note">⚠️ Sabato pre-lungo: volume moderato, mai al cedimento. Qualità > quantità.</div>
+        <div class="session-note">⚠️ Se lo fai vicino al lungo: volume moderato, mai al cedimento. Se sei lontano dal lungo: puoi spingere di più.</div>
         <table>
           <thead><tr><th>Esercizio</th><th>Serie × Rep</th><th>Kg usati</th><th>Note</th></tr></thead>
           <tbody>
@@ -220,9 +193,9 @@
           </tbody>
         </table>
         <div class="tip-box">
-          <h4>⚡ Regola del sabato</h4>
-          <div class="tip"><span class="tip-icon">🦵</span>Se sabato mattina hai ancora le gambe pesanti dal venerdì, <strong>salta lo squat e inizia dal RDL</strong>. Non forzare mai il giorno prima del lungo.</div>
-          <div class="tip"><span class="tip-icon">🍌</span>Carboidrati abbondanti a pranzo del sabato per ricaricare il glicogeno in vista della domenica.</div>
+          <h4>⚡ Regola gambe + lungo</h4>
+          <div class="tip"><span class="tip-icon">🦵</span>Se hai le gambe ancora pesanti dalla corsa precedente, <strong>salta lo squat e inizia dal RDL</strong>. Non forzare mai le gambe entro 24h dal lungo.</div>
+          <div class="tip"><span class="tip-icon">🍌</span>Se il lungo è l'indomani: carboidrati abbondanti a pranzo per ricaricare il glicogeno.</div>
         </div>
       </div>
     </div>
@@ -233,36 +206,25 @@
 <!-- PIANO 3 GIORNI -->
 <div class="plan" id="p3">
 
-  <div class="legend">
-    <div class="legend-item"><div class="legend-dot" style="background:#e8501a"></div> Forza</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#3a9fd5"></div> Corsa</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#f5c842"></div> Lungo</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#333"></div> Riposo</div>
+  <div class="flex-guide">
+    <div class="flex-rule">💪 <strong>UPPER leggero</strong> — Ideale dopo il lungo o dopo una corsa: gambe a riposo, busto attivo. Riduci a 2 serie se sei stanco.</div>
+    <div class="flex-rule">🦵 <strong>LOWER</strong> — Scegli il giorno più lontano dal lungo e dagli interval. Questo è il giorno in cui puoi spingere davvero sulle gambe.</div>
+    <div class="flex-rule">💪 <strong>UPPER pesante</strong> — Almeno 1 giorno di distanza da una corsa dura. Panca e trazioni al massimo.</div>
+    <div class="flex-rule">⚡ <strong>Regola d'oro</strong> — Rispetta almeno 48h tra LOWER e lungo. Per l'upper non ci sono vincoli rigidi.</div>
   </div>
-
-  <div class="week-grid">
-    <div class="day-cell strength"><div class="day-name">Lun</div><div class="day-icon">💪</div><div class="day-label">UPPER leggero</div></div>
-    <div class="day-cell run"><div class="day-name">Mar</div><div class="day-icon">🏃</div><div class="day-label">Corsa oppure</div></div>
-    <div class="day-cell strength"><div class="day-name">Mer</div><div class="day-icon">💪</div><div class="day-label">LOWER — se libero</div></div>
-    <div class="day-cell strength"><div class="day-name">Gio</div><div class="day-icon">💪</div><div class="day-label">UPPER pesante</div></div>
-    <div class="day-cell run"><div class="day-name">Ven</div><div class="day-icon">🏃</div><div class="day-label">Corsa</div></div>
-    <div class="day-cell rest"><div class="day-name">Sab</div><div class="day-icon">😴</div><div class="day-label">Riposo pre-lungo</div></div>
-    <div class="day-cell long"><div class="day-name">Dom</div><div class="day-icon">🏃💨</div><div class="day-label">Lungo</div></div>
-  </div>
-  <p style="text-align:center; font-size:0.72rem; color:#888; margin-bottom:20px;">📌 Il LOWER va nel giorno libero tra Mar/Mer (quello in cui non corri)</p>
 
   <div class="sessions">
 
     <!-- UPPER LEGGERO -->
     <div class="session-card" id="s3a">
       <div class="session-header" onclick="toggleSession('s3a')">
-        <span class="session-badge">Lunedì</span>
-        <span class="session-title">UPPER leggero — Recupero attivo</span>
+        <span class="session-badge">UPPER leggero</span>
+        <span class="session-title">Recupero attivo — Busto</span>
         <span class="session-meta">⏱ ~40 min</span>
         <span class="chevron">▼</span>
       </div>
       <div class="session-body">
-        <div class="session-note">💬 Lunedì post-lungo: gambe a riposo totale. Upper leggero per mantenere la frequenza senza stressare il sistema nervoso.</div>
+        <div class="session-note">💬 Perfetto dopo il lungo o dopo una corsa: gambe a riposo totale, busto attivo. Non è un giorno di performance.</div>
         <table>
           <thead><tr><th>Esercizio</th><th>Serie × Rep</th><th>Kg usati</th><th>Note</th></tr></thead>
           <tbody>
@@ -276,7 +238,7 @@
         </table>
         <div class="tip-box">
           <h4>⚡ Filosofia del lunedì</h4>
-          <div class="tip"><span class="tip-icon">🔋</span>Questo non è un giorno di performance — è un giorno di <strong>frequenza e volume leggero</strong>. Se sei ancora molto stanco, riduci a 2 serie per esercizio o spostalo al martedì se quel giorno non corri.</div>
+          <div class="tip"><span class="tip-icon">🔋</span>Questo è un giorno di <strong>frequenza e volume leggero</strong>. Se sei ancora molto stanco, riduci a 2 serie per esercizio o rimanda.</div>
         </div>
       </div>
     </div>
@@ -284,13 +246,13 @@
     <!-- LOWER -->
     <div class="session-card" id="s3b">
       <div class="session-header" onclick="toggleSession('s3b')">
-        <span class="session-badge lower">Mar o Mer libero</span>
-        <span class="session-title">LOWER — Gambe focus</span>
+        <span class="session-badge lower">LOWER</span>
+        <span class="session-title">Gambe — Sessione principale</span>
         <span class="session-meta">⏱ ~45 min</span>
         <span class="chevron">▼</span>
       </div>
       <div class="session-body">
-        <div class="session-note">💬 Il giorno migliore per le gambe: lontano dal venerdì e dal lungo. Vai pesante qui.</div>
+        <div class="session-note">💬 Scegli il giorno più lontano dal lungo e dagli interval. Almeno 48h prima del lungo. Qui puoi spingere davvero.</div>
         <table>
           <thead><tr><th>Esercizio</th><th>Serie × Rep</th><th>Kg usati</th><th>Note</th></tr></thead>
           <tbody>
@@ -311,13 +273,13 @@
     <!-- UPPER PESANTE -->
     <div class="session-card" id="s3c">
       <div class="session-header" onclick="toggleSession('s3c')">
-        <span class="session-badge">Giovedì</span>
-        <span class="session-title">UPPER pesante — Spinta · Tiraggio · Braccia</span>
+        <span class="session-badge">UPPER pesante</span>
+        <span class="session-title">Spinta · Tiraggio · Braccia</span>
         <span class="session-meta">⏱ ~48 min</span>
         <span class="chevron">▼</span>
       </div>
       <div class="session-body">
-        <div class="session-note">💬 Giorno principale di upper. Vai pesante sulla panca e trazioni, poi chiudi con volume braccia.</div>
+        <div class="session-note">💬 Sessione principale di upper. Scegli un giorno in cui non hai corso duro nelle 24h precedenti. Vai pesante su panca e trazioni.</div>
         <table>
           <thead><tr><th>Esercizio</th><th>Serie × Rep</th><th>Kg usati</th><th>Note</th></tr></thead>
           <tbody>
@@ -466,11 +428,6 @@
   // Init
   initAllCells();
   updateStats();
-
-  // PWA Service Worker
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').catch(() => {});
-  }
 </script>
 </body>
 </html>
